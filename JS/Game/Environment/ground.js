@@ -38,21 +38,43 @@ export default class Ground {
         c.stroke();
     }
 
-    generatePoints(num, start) {
+    generatePoints(num, start, reverse) {
         const max = (1 - this.config.maxY) * this.elm.height;
         const min = (1 - this.config.minY) * this.elm.height;
-        const increment = this.elm.width / num;
+        const increment = this.elm.width / this.config.numPoints;
 
         var points = start || [];
 
-        for (let i = points.length; i < num + 2; i++) {
-            const x = i * increment;
+        for (let i = 0; i < num + 1; i++) {
+            const pos = points.filter(p => p.x >= 0).length;
+            const neg = points.filter(p => p.x < 0).length;
+
+            const x = !reverse ? pos * increment : (neg + 1) * -increment;
             const y = Math.floor(Math.random() * (max - min)) + min;
         
-            points.push({x: x, y: y});
+            if (!reverse) points.push({x: x, y: y});
+            else points.unshift({x: x, y: y});
         }
 
         this.points = points;
         return points;
+    }
+
+    update() {
+        if (!this.points) return;
+
+        const transform = this.c.getTransform().e;
+
+        if (-transform + this.elm.width > this.points[this.points.length - 1].x) {
+            console.log("Generating new curve to the right.");
+            this.generatePoints(1, this.points);
+        } else if (-transform < this.points[0].x) {
+            console.log("Generating new curve to the left.");
+            this.generatePoints(1, this.points, true);
+        }
+    }
+
+    resize() {
+        this.setVariableConstants();
     }
 }

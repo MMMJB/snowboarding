@@ -12,16 +12,14 @@ export default class Environment {
     }
 
     draw() {
+        this.controls.update();
+        this.ground.update();
+        
         this.ground.draw(this.ground.points);
     }
 
     resize() {
-        // if (window.innerWidth > this.ground.config.width + this.ground.config.curveWidth) {
-        //     this.ground.generatePoints(this.ground.points.length + 1, this.ground.points);
-            
-        //     this.ground.setVariableConstants();
-        // }
-
+        this.ground.resize();
         this.ground.draw(this.ground.points);
     }
 }

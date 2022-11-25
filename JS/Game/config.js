@@ -3,7 +3,8 @@ export default {
         fps: 60
     },
     controls: {
-        scrollAmount: 10
+        scrollAmount: 10,
+        scrollInterp: .15
     },
     ground: {
         minY: .2,

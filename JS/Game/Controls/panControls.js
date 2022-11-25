@@ -1,11 +1,14 @@
 import Game from "../game";
 
+import lerp from "../Utils/lerp";
+
 export default class PanControls {
     constructor(ground) {
         this.parent = new Game();
         this.ground = ground;
 
         this.config = this.parent.config.controls;
+        this.dx = 0;
 
         this.init();
     }
@@ -19,11 +22,16 @@ export default class PanControls {
 
     scrollRight() {
         this.ground.x += this.config.scrollAmount;
-        this.parent.c.translate(this.config.scrollAmount, 0);
     }
 
     scrollLeft() {
         this.ground.x -= this.config.scrollAmount;
-        this.parent.c.translate(-this.config.scrollAmount, 0);
+    }
+
+    update() {
+        this.dx = lerp(this.dx, this.ground.x, this.config.scrollInterp);
+        this.dx = Math.floor(this.dx * 100) / 100;
+
+        if (Math.abs(this.dx) > 0) this.parent.c.translate(this.ground.x - this.dx, 0);
     }
 }
