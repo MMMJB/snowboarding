@@ -14,19 +14,16 @@ export default class PanControls {
         this.parent.elm.onwheel = e => {
             if (e.deltaY < 0) this.scrollRight();
             else this.scrollLeft();
-
-            this.parent.c.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            this.parent.c.setTransform(1, 0, 0, 1, this.ground.x, 0);
-            
-            this.ground.draw(this.ground.points);
         }
     }
 
     scrollRight() {
         this.ground.x += this.config.scrollAmount;
+        this.parent.c.translate(this.config.scrollAmount, 0);
     }
 
     scrollLeft() {
         this.ground.x -= this.config.scrollAmount;
+        this.parent.c.translate(-this.config.scrollAmount, 0);
     }
 }

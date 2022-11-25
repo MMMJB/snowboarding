@@ -23,6 +23,7 @@ export default class Ground {
         const c = this.c;
         const points = p || this.generatePoints(this.config.numPoints);
 
+        c.beginPath();
         c.moveTo(points[0].x, points[0].y);
 
         for (var i = 1; i < points.length - 2; i++) {

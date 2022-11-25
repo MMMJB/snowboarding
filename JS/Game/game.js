@@ -20,6 +20,8 @@ export default class Game {
 
         this.config = config;
         this.environment = new Environment();
+
+        const simLoop = setInterval(_ => this.draw(), 1000 / this.config.general.fps);
     }
 
     resize() {
@@ -29,5 +31,14 @@ export default class Game {
         this.elm.height = this.elm.offsetHeight * ratio;
 
         this.environment?.resize();
+    }
+
+    draw() {
+        this.c.save();
+        this.c.setTransform(1, 0, 0, 1, 0, 0);
+        this.c.clearRect(0, 0, this.elm.width, this.elm.height);
+        this.c.restore();
+
+        this.environment.draw();
     }
 }
