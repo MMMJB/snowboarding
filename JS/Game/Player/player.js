@@ -1,6 +1,7 @@
 import Game from "../game";
 
 import PlayerControls from "../Controls/playerControls";
+import PlayerPhysics from "./playerPhysics";
 
 import getBezierPoint from "../Utils/bezierPoint";
 
@@ -11,7 +12,11 @@ export default class Player {
         this.c = this.parent.c;
         this.config = this.parent.config.player;
         this.ground = this.parent.environment.ground;
-        this.engine = this.parent.physics;
+
+        this.vx = 0;
+        this.vy = 0;
+        this.ax = 0;
+        this.ay = 0;
 
         this.parent.on("drawnPoints", p => {
             this.drawnPoints = p;
@@ -20,9 +25,7 @@ export default class Player {
                 this.controls = new PlayerControls();
                 this.moveTo(this.parent.elm.width / 2);
 
-                this.vx = 0;
-
-                this.engine.o.add(false, this.config.size, 1, this.x, this.y);
+                this.physics = new PlayerPhysics(this);
             }
         });
     }
@@ -45,7 +48,12 @@ export default class Player {
     }
 
     update() {
-        this.moveTo(this.x + this.vx);
+        this.physics.calcGroundForce();
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.y > this.calculateY(this.x) - this.config.size) this.y = this.calculateY(this.x) - this.config.size;
     }
 
     draw() {

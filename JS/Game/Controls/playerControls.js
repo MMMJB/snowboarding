@@ -12,12 +12,10 @@ export default class PlayerControls {
             switch (e.key) {
                 case "ArrowRight":
                     this.player.vx += this.config.moveAmount;
-                    this.parent.c.translate(-this.config.moveAmount, 0);
 
                     break;
                 case "ArrowLeft":
                     this.player.vx -= this.config.moveAmount;
-                    this.parent.c.translate(this.config.moveAmount, 0);
 
                     break;
             }

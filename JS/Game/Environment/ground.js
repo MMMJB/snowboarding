@@ -1,8 +1,5 @@
 import Game from "../game";
 
-import drawPoint from "../Utils/drawPoint";
-import getBezierPoint from "../Utils/bezierPoint";
-
 export default class Ground {
     constructor() {
         this.parent = new Game();

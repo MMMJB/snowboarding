@@ -1,8 +1,8 @@
 import config from "./config";
 
 import Time from "./Utils/time";
+import Helpers from "./Utils/helpers";
 
-import PhysicsEngine from "./Physics/physics";
 import Environment from "./Environment/environment";
 import Player from "./Player/player";
 
@@ -29,7 +29,8 @@ export default class Game extends EventEmitter {
         this.config = config;
         
         this.time = new Time();
-        this.physics = new PhysicsEngine();
+        this.helpers = new Helpers();
+
         this.environment = new Environment();
         this.player = new Player();
 
@@ -53,9 +54,8 @@ export default class Game extends EventEmitter {
         this.c.clearRect(0, 0, this.elm.width, this.elm.height);
         this.c.restore();
 
-        this.physics.update();
-
         this.environment.draw();
         this.player.draw();
+        this.helpers.draw();
     }
 }
