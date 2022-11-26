@@ -1,11 +1,16 @@
 import config from "./config";
 
 import Environment from "./Environment/environment";
+import Player from "./Player/player";
 
-export default class Game {
+import EventEmitter from "events";
+
+export default class Game extends EventEmitter {
     static instance;
 
     constructor(elm, ctx) {
+        super();
+
         if (Game.instance) return Game.instance;
         Game.instance = this;
 
@@ -19,7 +24,9 @@ export default class Game {
         this.resize();
 
         this.config = config;
+        
         this.environment = new Environment();
+        this.player = new Player();
 
         const simLoop = setInterval(_ => this.draw(), 1000 / this.config.general.fps);
     }
@@ -40,5 +47,6 @@ export default class Game {
         this.c.restore();
 
         this.environment.draw();
+        this.player.draw();
     }
 }

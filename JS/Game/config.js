@@ -10,5 +10,10 @@ export default {
         minY: .2,
         maxY: .4,
         numCurves: .01
+    },
+    player: {
+        size: 10,
+        color: "red",
+        moveAmount: 10
     }
 }
