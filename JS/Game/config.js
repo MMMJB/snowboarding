@@ -14,6 +14,10 @@ export default {
     player: {
         size: 10,
         color: "red",
-        moveAmount: 10
+        moveAmount: 10,
+        moveInterp: .1
+    },
+    physics: {
+        gravConstant: .05
     }
 }

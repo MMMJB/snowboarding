@@ -20,12 +20,12 @@ export default class PanControls {
         }
     }
 
-    scrollRight() {
-        this.ground.x += this.config.scrollAmount;
+    scrollRight(amt) {
+        this.ground.x += amt || this.config.scrollAmount;
     }
 
-    scrollLeft() {
-        this.ground.x -= this.config.scrollAmount;
+    scrollLeft(amt) {
+        this.ground.x -= amt || this.config.scrollAmount;
     }
 
     update() {

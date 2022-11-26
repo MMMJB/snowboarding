@@ -11,6 +11,7 @@ export default class Player {
         this.c = this.parent.c;
         this.config = this.parent.config.player;
         this.ground = this.parent.environment.ground;
+        this.engine = this.parent.physics;
 
         this.parent.on("drawnPoints", p => {
             this.drawnPoints = p;
@@ -18,6 +19,10 @@ export default class Player {
             if (!this.controls) {
                 this.controls = new PlayerControls();
                 this.moveTo(this.parent.elm.width / 2);
+
+                this.vx = 0;
+
+                this.engine.o.add(false, this.config.size, 1, this.x, this.y);
             }
         });
     }
@@ -39,7 +44,13 @@ export default class Player {
         this.y = this.calculateY(this.x) - this.config.size;
     }
 
+    update() {
+        this.moveTo(this.x + this.vx);
+    }
+
     draw() {
+        this.update();
+        
         this.c.beginPath();
         
         this.c.arc(this.x, this.y, this.config.size, 0, 2 * Math.PI);
