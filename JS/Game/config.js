@@ -13,6 +13,7 @@ export default {
     },
     player: {
         size: 10,
+        mass: .75,
         color: "red",
         moveAmount: 1,
         moveInterp: .1

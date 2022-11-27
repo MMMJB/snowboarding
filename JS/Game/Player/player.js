@@ -13,6 +13,8 @@ export default class Player {
         this.config = this.parent.config.player;
         this.ground = this.parent.environment.ground;
 
+        this.mass = this.config.mass;
+
         this.vx = 0;
         this.vy = 0;
         this.ax = 0;
@@ -57,6 +59,8 @@ export default class Player {
             this.y = this.calculateY(this.x) - this.config.size;
             this.vy = this.parent.config.physics.gravConstant;
         }
+
+        this.parent.environment.controls.scrollTo(-(this.x - window.innerWidth / 2) / 5.75);
     }
 
     draw() {

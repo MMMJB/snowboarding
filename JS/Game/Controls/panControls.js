@@ -28,6 +28,10 @@ export default class PanControls {
         this.ground.x -= amt || this.config.scrollAmount;
     }
 
+    scrollTo(pos) {
+        this.ground.x = pos;
+    }
+
     update() {
         this.dx = lerp(this.dx, this.ground.x, this.config.scrollInterp);
         this.dx = Math.floor(this.dx * 100) / 100;
