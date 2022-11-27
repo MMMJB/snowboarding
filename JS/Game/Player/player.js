@@ -48,12 +48,15 @@ export default class Player {
     }
 
     update() {
-        this.physics.calcGroundForce();
+        this.physics.exertForce();
 
         this.x += this.vx;
         this.y += this.vy;
 
-        if (this.y > this.calculateY(this.x) - this.config.size) this.y = this.calculateY(this.x) - this.config.size;
+        if (this.y > this.calculateY(this.x) - this.config.size) {
+            this.y = this.calculateY(this.x) - this.config.size;
+            this.vy = this.parent.config.physics.gravConstant;
+        }
     }
 
     draw() {

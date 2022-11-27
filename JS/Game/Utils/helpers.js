@@ -11,8 +11,8 @@ export default class Helpers {
     }
 
     draw() {
-        this.points.forEach(p => this.drawPoint(p.x, p.y, p.col));
         this.lines.forEach(l => this.drawLine(l.x1, l.y1, l.x2, l.y2, l.col));
+        this.points.forEach(p => this.drawPoint(p.x, p.y, p.col));
     }
 
     drawPoint(x, y, col) {

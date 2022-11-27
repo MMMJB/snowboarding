@@ -18,7 +18,7 @@ export default {
         moveInterp: .1
     },
     physics: {
-        gravConstant: 2.5,
+        gravConstant: 3,
         friction: .005
     }
 }
