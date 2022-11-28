@@ -52,10 +52,10 @@ export default class Ground {
 
         c.stroke();
 
-        // drawnPoints.forEach(p => {
-        //     drawPoint(c, p.cx, p.cy, "green")
-        //     drawPoint(c, p.ex, p.ey, "blue")
-        // })
+        drawnPoints.forEach(p => {
+            this.parent.helpers.drawPoint(p.cx, p.cy, "green")
+            this.parent.helpers.drawPoint(p.ex, p.ey, "blue")
+        })
 
         if (this.drawnPoints.length !== drawnPoints.length) this.parent.emit("drawnPoints", drawnPoints);
         this.drawnPoints = drawnPoints;
